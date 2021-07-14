@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\BaseController;
+use App\Models\CacheFile;
 use App\Models\Link;
 use App\Models\Response;
 
@@ -21,14 +22,14 @@ class LinkController extends BaseController
         }
 
         // using cache
+        $result = CacheFile::remember($url, function () use ($url) {
+            $record = new Link();
+            return $record->find('url', $url);
+        });
 
 
-        // using database
-        $record = new Link();
-        $record = $record->find('url', $url);
-
-        if (count($record)) {
-            Response::success($record[0]['slug']);
+        if (count($result)) {
+            Response::success($result[0]['slug']);
         }
 
         //create new slug
@@ -46,14 +47,16 @@ class LinkController extends BaseController
             $try++;
 
             // if the finding new slug was difficult, guess with larger length
-            if ($try > 20){
+            if ($try > 20) {
                 $length++;
                 $try = 0;
             }
         }
 
         $record = new Link();
-        $record->insert(['url','slug'], [$url, $new_slug]);
+        $record->insert(['url',
+            'slug'], [$url,
+            $new_slug]);
         Response::success($new_slug);
     }
 

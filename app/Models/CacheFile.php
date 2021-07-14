@@ -10,6 +10,7 @@ class CacheFile
 
     public static function remember($key, $callback)
     {
+        $key = md5($key);
         if (file_exists(self::$dir . $key)) {
             $result = file_get_contents(self::$dir . $key);
             return unserialize($result);
