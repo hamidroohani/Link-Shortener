@@ -14,6 +14,11 @@ class LinkController extends BaseController
 
     public function create()
     {
+        if (!isset($_POST['link']))
+        {
+            Response::param_not_found();
+        }
+
         $url = $_POST['link'];
 
         // validate url

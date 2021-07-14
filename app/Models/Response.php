@@ -67,4 +67,16 @@ class Response
             ]
         ));
     }
+
+    public static function param_not_found()
+    {
+        header('HTTP/1.0 400 BAD REQUEST');
+        header('Content-Type: application/json');
+        exit(json_encode(
+            [
+                'status' => false,
+                "message" => "You must call post method and send a parameter with link name"
+            ]
+        ));
+    }
 }
