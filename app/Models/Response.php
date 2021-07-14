@@ -92,6 +92,18 @@ class Response
         ));
     }
 
+    public static function require_parameters($name)
+    {
+        header('HTTP/1.0 400 BAD REQUEST');
+        header('Content-Type: application/json');
+        exit(json_encode(
+            [
+                'status' => false,
+                "message" => "The " . $name . " is require!"
+            ]
+        ));
+    }
+
     public static function success_token($token)
     {
         header("HTTP/1.1 200 OK");
@@ -101,6 +113,42 @@ class Response
                 'status' => true,
                 "message" => "The token is " . $token . " please put it on header",
                 "token" => $token
+            ]
+        ));
+    }
+
+    public static function not_valid_token()
+    {
+        header('HTTP/1.0 400 BAD REQUEST');
+        header('Content-Type: application/json');
+        exit(json_encode(
+            [
+                'status' => false,
+                "message" => "Your token is not valid"
+            ]
+        ));
+    }
+
+    public static function all_links($records)
+    {
+        header("HTTP/1.1 200 OK");
+        header('Content-Type: application/json');
+        exit(json_encode(
+            [
+                'status' => true,
+                "message" => json_encode($records)
+            ]
+        ));
+    }
+
+    public static function delete_successfully()
+    {
+        header("HTTP/1.1 200 OK");
+        header('Content-Type: application/json');
+        exit(json_encode(
+            [
+                'status' => true,
+                "message" => "One record deleted successfully"
             ]
         ));
     }

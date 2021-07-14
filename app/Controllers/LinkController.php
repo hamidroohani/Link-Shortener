@@ -4,18 +4,30 @@ use App\Http\BaseController;
 use App\Models\CacheFile;
 use App\Models\Link;
 use App\Models\Response;
+use App\Models\Token;
 
 class LinkController extends BaseController
 {
+    public function check_token()
+    {
+        $headers = apache_request_headers();
+        if (!isset($headers['token'])) Response::require_parameters("token");
+
+        $token = new Token();
+        $token = $token->where("token", "=", $headers['token'])->where("expire_date", ">", date("Y-m-d H:i:s"))->get();
+        if (!count($token)) Response::not_valid_token();
+    }
+
     public function index()
     {
-        echo generateRandomString();
+        $this->check_token();
+        $record = new Link();
+        Response::all_links($record->all());
     }
 
     public function create()
     {
-        if (!isset($_POST['link']))
-        {
+        if (!isset($_POST['link'])) {
             Response::param_not_found();
         }
 
@@ -65,4 +77,13 @@ class LinkController extends BaseController
         Response::success($new_slug);
     }
 
+    public function destroy()
+    {
+        $this->check_token();
+        $id = $_POST['id'];
+        if (!isset($_POST['id'])) Response::require_parameters("id");
+        $record = new Link();
+        $record->delete($id);
+        Response::delete_successfully();
+    }
 }

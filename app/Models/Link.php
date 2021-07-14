@@ -13,6 +13,16 @@ class Link extends DB
         parent::__construct();
     }
 
+    public function all()
+    {
+        $this->query = mysqli_query($this->connstr, "SELECT * FROM `" . $this->table . "`;");
+        $result = [];
+        while ($res = mysqli_fetch_assoc($this->query)) {
+            array_push($result, $res);
+        }
+        return $result;
+    }
+
     public function find($filed_name, $value)
     {
         $this->query = mysqli_query($this->connstr, "SELECT url,slug FROM `" . $this->table . "` WHERE `" . $filed_name . "`='" . $value . "';");
@@ -32,5 +42,9 @@ class Link extends DB
 
         CacheFile::flush();
         return true;
+    }
+    public function delete($id)
+    {
+        return mysqli_query($this->connstr, "DELETE FROM `" . $this->table . "` WHERE `" . id . "`=" . $id . ";");
     }
 }
