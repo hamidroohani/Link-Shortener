@@ -1,0 +1,44 @@
+{
+	"id": "5b120879-0281-8051-21f4-074d51299dce",
+	"name": "collection",
+	"description": "",
+	"order": [
+		"07afe83f-59e5-bbd6-ebe4-07cc4fda04c3"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1626283895502,
+	"owner": "8561506",
+	"public": false,
+	"requests": [
+		{
+			"id": "07afe83f-59e5-bbd6-ebe4-07cc4fda04c3",
+			"headers": "",
+			"headerData": [],
+			"url": "http://short.develop/link/create/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "link",
+					"value": "https://www.filimo.com/tag/family",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1626284226775,
+			"name": "CreateShortenerLink",
+			"description": "",
+			"collectionId": "5b120879-0281-8051-21f4-074d51299dce",
+			"responses": []
+		}
+	]
+}
