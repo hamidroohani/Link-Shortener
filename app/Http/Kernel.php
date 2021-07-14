@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Config;
+use App\Models\DB;
 
 class Kernel
 {
@@ -21,6 +22,9 @@ class Kernel
             $this->controller = $format_url;
             unset($url[0]);
         }
+
+        $database = new DB();
+        $database->check_table_exists();
 
         require_once Config::CONTROLLERS_PATH . $this->controller . ".php";
         $this->controller = new $this->controller;
