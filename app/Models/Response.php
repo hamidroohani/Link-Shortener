@@ -79,4 +79,29 @@ class Response
             ]
         ));
     }
+
+    public static function require_parameter($name)
+    {
+        header('HTTP/1.0 400 BAD REQUEST');
+        header('Content-Type: application/json');
+        exit(json_encode(
+            [
+                'status' => false,
+                "message" => "The " . $name . " are require!"
+            ]
+        ));
+    }
+
+    public static function success_token($token)
+    {
+        header("HTTP/1.1 200 OK");
+        header('Content-Type: application/json');
+        exit(json_encode(
+            [
+                'status' => true,
+                "message" => "The token is " . $token . " please put it on header",
+                "token" => $token
+            ]
+        ));
+    }
 }
