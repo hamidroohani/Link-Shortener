@@ -30,6 +30,7 @@ class Link extends DB
         $this->query = "insert into " . $this->table . " ({$fields},created_at, updated_at) values ('{$records}',NOW(),NOW())";
         $this->query = mysqli_query($this->connstr, $this->query);
 
+        CacheFile::flush();
         return true;
     }
 }
