@@ -7,7 +7,7 @@ use App\Models\DB;
 
 class Kernel
 {
-    public $controller = "HomeController";
+    public $controller = "LinkController";
     public $action = "index";
     public $params = [];
 

@@ -2,11 +2,11 @@
 
 use App\Http\BaseController;
 
-class HomeController extends BaseController
+class LinkController extends BaseController
 {
     public function index()
     {
-        echo $_GET['hi'];
+        echo generateRandomString();
     }
 
     public function get()
