@@ -5,5 +5,9 @@
     }, "files": [
       "app/helpers/global.php"
     ]
+  },
+  "require": {
+    "ext-mysqli": "*",
+    "ext-json": "*"
   }
 }

@@ -7,7 +7,7 @@ use App\Http\Config;
 class DB
 {
     public $connstr = null;
-    public $table = "wp_posts";
+    public $table = "links";
     public $query = null;
 
     public $hostname = null;
